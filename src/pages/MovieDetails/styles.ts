@@ -37,9 +37,13 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   display: flex;
   align-items: center;
   /* margin: 30px auto; */
-  /* padding: 30px 50px; */
+  padding: 30px 50px;
 `;
 
-export const MoviePoster = styled.div``;
+export const MoviePoster = styled.div`
+  img {
+    border-radius: 50px;
+  }
+`;
 
 export const MovieInfo = styled.div``;

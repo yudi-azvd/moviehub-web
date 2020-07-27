@@ -13,6 +13,7 @@ import {
 interface Movie {
   title?: string;
   overview?: string;
+  tagline?: string;
   posterPath?: string;
   backdropPath?: string;
   voteAverage: number;
@@ -44,6 +45,8 @@ const MovieDetails: React.FC = () => {
 
         <MovieInfo>
           <h1>{movie?.title}</h1>
+          <p>{movie?.tagline}</p>
+          <strong>Sinopse</strong>
           <p>{movie?.overview}</p>
           <p>
             {movie?.voteAverage * 10}
