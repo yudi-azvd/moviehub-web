@@ -5,45 +5,44 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const MovieBackdrop = styled.div`
-  position: absolute;
-  z-index: -99;
-  background: #0004;
-
-  img {
-    /* transform: translateX(10%); */
-    opacity: 0.5;
-    width: 100vw;
-  }
-`;
-
 interface MovieBannerProps {
   backgroundUrl: string | undefined;
 }
 
 export const MovieBanner = styled.div<MovieBannerProps>`
   position: relative;
-  background: #0004;
   width: 100%;
   height: 90vh;
 
+  background: #0004;
   color: #fff;
 
-  /* Gradiente muda com a o resize da página. mas a imagem continua no mesmo tamanho */
+  /* Gradiente muda com o resize da página. mas a imagem continua no mesmo tamanho */
   background-image: linear-gradient(to right, #444 16.15%, #444a 100%),
     url(${(props) => props.backgroundUrl});
-  background-size: contain;
+  /* ajuste vertical */
+  background-size: auto 100%;
 
   display: flex;
   align-items: center;
-  /* margin: 30px auto; */
   padding: 30px 50px;
 `;
 
 export const MoviePoster = styled.div`
   img {
-    border-radius: 50px;
+    border-radius: 10px;
   }
 `;
 
-export const MovieInfo = styled.div``;
+export const MovieInfo = styled.div`
+  margin-left: 50px;
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+`;

@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import api from '../../services/api';
 
-import {
-  Container,
-  MovieBanner,
-  MovieBackdrop,
-  MoviePoster,
-  MovieInfo,
-} from './styles';
+import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 
 interface Movie {
   title?: string;
@@ -19,25 +13,30 @@ interface Movie {
   voteAverage: number;
 }
 
-const MovieDetails: React.FC = () => {
+type Props = {
+  match: {
+    params: {
+      id: string;
+    };
+  };
+};
+
+const MovieDetails: React.FC<Props> = ({ match }: Props) => {
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);
 
   useEffect(() => {
     async function loadMovie(): Promise<void> {
-      const response = await api.get<Movie>('/movies/550');
+      const response = await api.get<Movie>(`/movies/${match.params.id}`);
       setMovie(response.data);
     }
 
     loadMovie();
-  }, []);
+  }, [match.params.id]);
 
   return (
     <Container>
-      <MovieBackdrop>
-        {/* <img src={movie?.backdropPath} alt={movie?.title} /> */}
-      </MovieBackdrop>
       <MovieBanner backgroundUrl={movie.backdropPath}>
         <MoviePoster>
           <img src={movie?.posterPath} alt={movie?.title} />
