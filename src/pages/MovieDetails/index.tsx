@@ -38,6 +38,11 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
 
   const context = useMemo(() => canvasRef.current?.getContext('2d'), []);
 
+  /**
+   * Ideias para otimização:
+   * 1. pegar apenas um pixel no meio da imagem
+   * 2. pular em mútiplos de quatro (i+=4, i+=8, i++40...)
+   */
   const getDominantColor = useCallback((): string => {
     const width = 300;
     const height = 450;
