@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { transparentize } from 'polished';
 
 export const Container = styled.div`
   /* max-width: 1980px; */
@@ -7,33 +8,34 @@ export const Container = styled.div`
 
 interface MovieBannerProps {
   backgroundUrl: string | undefined;
-  color: string | undefined;
+  color: string;
 }
 
 export const MovieBanner = styled.div<MovieBannerProps>`
   position: relative;
   width: 100%;
   height: 90vh;
-
-  background: #0004;
-  color: #fff;
-
-  /* Gradiente muda com o resize da página. mas a imagem continua no mesmo tamanho */
-  background-image: linear-gradient(to right, #444 16.15%, #444a 100%),
-    url(${(props) => props.backgroundUrl});
-  /* ajuste vertical */
-  background-size: auto 100%;
-
   display: flex;
   align-items: center;
   padding: 30px 50px;
+  background: ${(props) => props.color};
+  color: #fff;
+
+  /* ajuste vertical */
+  background-size: auto 100%;
+  /* Gradiente muda com o resize da página. mas a imagem continua no mesmo tamanho */
+  background-image: linear-gradient(
+      to right,
+      ${(props) => props.color} 16.15%,
+      ${(props) => transparentize(0.2, props.color)} 100%
+    ),
+    url(${(props) => props.backgroundUrl});
+  background-position: left 100px bottom 0;
+  /* https://css-tricks.com/positioning-offset-background-images/ */
+  background-repeat: no-repeat;
 `;
 
 export const MoviePoster = styled.div`
-  canvas {
-    border-radius: 10px;
-  }
-
   img {
     border-radius: 10px;
     display: none;

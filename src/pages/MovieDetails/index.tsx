@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-  useCallback,
-} from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 import api from '../../services/api';
 
@@ -28,15 +22,16 @@ type Props = {
 };
 
 const MovieDetails: React.FC<Props> = ({ match }: Props) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const posterRef = useRef<HTMLImageElement>(null);
+
+  const [color, setColor] = useState('#0000');
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const posterRef = useRef<HTMLImageElement>(null);
-
-  const context = useMemo(() => canvasRef.current?.getContext('2d'), []);
+  // useMemo não ta indo direito
+  const context = canvasRef.current?.getContext('2d');
 
   /**
    * Ideias para otimização:
@@ -44,52 +39,44 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
    * 2. pular em mútiplos de quatro (i+=4, i+=8, i++40...)
    */
   const getDominantColor = useCallback((): string => {
+    // referência
+    // https://www.w3schools.com/tags/canvas_getimagedata.asp
     const width = 300;
     const height = 450;
     const imageData = context?.getImageData(0, 0, width, height);
 
-    console.log('imageData', context);
-    console.log('imageData', imageData);
-
     if (!imageData) {
-      return '#555';
+      return '#555555';
     }
 
     let red = 0;
     let green = 0;
     let blue = 0;
 
-    for (let i = 0; i < imageData?.data.length; i += 40) {
-      red += imageData?.data[i];
-      green += imageData?.data[i + 1];
-      blue += imageData?.data[i + 2];
-      console.log('hey');
+    for (let i = 0; i < imageData.data.length; i += 400) {
+      red += imageData.data[i];
+      green += imageData.data[i + 1];
+      blue += imageData.data[i + 2];
     }
 
-    const total = width * height;
-    const meanRed = red / total;
-    const meanGreen = green / total;
-    const meanBlue = blue / total;
+    const total = ((width * height) / 400) * 4;
+    const meanRed = Math.floor(red / total);
+    const meanGreen = Math.floor(green / total);
+    const meanBlue = Math.floor(blue / total);
 
-    const color = `rgb(${meanRed}, ${meanGreen}, ${meanBlue})`;
+    const rgb = `rgb(${meanRed}, ${meanGreen}, ${meanBlue})`;
 
-    console.log('color', color);
-
-    return color;
+    return rgb;
   }, [context]);
-
-  const color = useMemo(() => getDominantColor(), [getDominantColor]);
 
   useEffect(() => {
     async function loadMovie(): Promise<void> {
       const response = await api.get<Movie>(`/movies/${match.params.id}`);
       setMovie(response.data);
-
-      console.log('draw image', getDominantColor());
     }
 
     loadMovie();
-  }, [match.params.id]);
+  }, [match.params.id, getDominantColor]);
 
   useEffect(() => {
     function doTheThing(): void {
@@ -98,9 +85,13 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
       }
 
       const posterImage = new Image();
+      posterImage.onload = () => {
+        // eslint-disable-next-line no-unused-expressions
+        context?.drawImage(posterImage, 0, 0);
+        setColor(getDominantColor());
+      };
       posterImage.src = movie.posterPath;
-      // eslint-disable-next-line no-unused-expressions
-      context?.drawImage(posterImage, 0, 0);
+      posterImage.crossOrigin = 'Anonymous';
     }
 
     doTheThing();
