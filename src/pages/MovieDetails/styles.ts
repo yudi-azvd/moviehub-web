@@ -7,6 +7,7 @@ export const Container = styled.div`
 
 interface MovieBannerProps {
   backgroundUrl: string | undefined;
+  color: string | undefined;
 }
 
 export const MovieBanner = styled.div<MovieBannerProps>`
@@ -29,8 +30,13 @@ export const MovieBanner = styled.div<MovieBannerProps>`
 `;
 
 export const MoviePoster = styled.div`
+  canvas {
+    border-radius: 10px;
+  }
+
   img {
     border-radius: 10px;
+    display: none;
   }
 `;
 
