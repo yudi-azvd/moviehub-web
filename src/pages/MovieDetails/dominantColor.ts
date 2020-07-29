@@ -1,4 +1,6 @@
 /**
+ * !!! "dominant color" uma ova. É a média
+ *
  * Ideias para otimização:
  * 1. pegar apenas um pixel no meio da imagem
  * 2. pular em mútiplos de quatro (i+=4, i+=8, i++40...)
