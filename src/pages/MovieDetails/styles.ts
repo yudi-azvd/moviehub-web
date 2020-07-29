@@ -8,7 +8,6 @@ export const Container = styled.div`
 
 interface MovieBannerProps {
   backgroundUrl: string | undefined;
-  color: string;
 }
 
 export const MovieBanner = styled.div<MovieBannerProps>`
@@ -20,7 +19,7 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   display: flex;
   align-items: center;
   padding: 30px 50px;
-  background: ${(props) => props.color};
+  background: #333;
   color: #fff;
 
   /* ajuste vertical */
@@ -28,11 +27,10 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   /* Gradiente muda com o resize da página. mas a imagem continua no mesmo tamanho */
   background-image: linear-gradient(
       to right,
-      ${(props) => props.color} 16.15%,
-      ${(props) => transparentize(0.2, props.color)} 100%
+      #333 16.15%,
+      ${transparentize(0.2, '#333')} 100%
     ),
     url(${(props) => props.backgroundUrl});
-  background-color: ${(props) => props.color};
   background-position: left 150px bottom 0;
   /* https://css-tricks.com/positioning-offset-background-images/ */
   background-repeat: no-repeat;
@@ -41,7 +39,6 @@ export const MovieBanner = styled.div<MovieBannerProps>`
 export const MoviePoster = styled.div`
   img {
     border-radius: 10px;
-    display: none;
   }
 `;
 
