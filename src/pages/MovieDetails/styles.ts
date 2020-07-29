@@ -14,6 +14,8 @@ interface MovieBannerProps {
 export const MovieBanner = styled.div<MovieBannerProps>`
   position: relative;
   width: 100%;
+  /* se vh diminuir, vai ficar sobrando espaço à esquerda.
+  Se estiver num daqueles monitores gigantes, vai faltar imagem. */
   height: 90vh;
   display: flex;
   align-items: center;
@@ -30,7 +32,8 @@ export const MovieBanner = styled.div<MovieBannerProps>`
       ${(props) => transparentize(0.2, props.color)} 100%
     ),
     url(${(props) => props.backgroundUrl});
-  background-position: left 100px bottom 0;
+  background-color: ${(props) => props.color};
+  background-position: left 150px bottom 0;
   /* https://css-tricks.com/positioning-offset-background-images/ */
   background-repeat: no-repeat;
 `;
@@ -46,11 +49,30 @@ export const MovieInfo = styled.div`
   margin-left: 50px;
 
   h1 {
+    font-size: 36px;
+  }
+
+  p.tagline {
+    opacity: 0.6;
     margin-bottom: 30px;
   }
 
   strong {
     display: block;
     margin-bottom: 5px;
+  }
+
+  section {
+    margin-bottom: 16px;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+
+    big,
+    small {
+      font-weight: bold;
+    }
   }
 `;

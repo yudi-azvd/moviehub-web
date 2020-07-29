@@ -1,8 +1,14 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { darken, getLuminance } from 'polished';
 
 import api from '../../services/api';
 
 import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
+import {
+  ggetDominantColor,
+  ggetDominantColor2,
+  ggetDominantColor3,
+} from './dominantColor';
 
 interface Movie {
   title?: string;
@@ -33,41 +39,17 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
   // useMemo não ta indo direito
   const context = canvasRef.current?.getContext('2d');
 
-  /**
-   * Ideias para otimização:
-   * 1. pegar apenas um pixel no meio da imagem
-   * 2. pular em mútiplos de quatro (i+=4, i+=8, i++40...)
-   */
-  const getDominantColor = useCallback((): string => {
-    // referência
-    // https://www.w3schools.com/tags/canvas_getimagedata.asp
-    const width = 300;
-    const height = 450;
-    const imageData = context?.getImageData(0, 0, width, height);
+  const getDominantColor = useCallback(() => ggetDominantColor(context), [
+    context,
+  ]);
 
-    if (!imageData) {
-      return '#555555';
-    }
+  const getDominantColor2 = useCallback(() => ggetDominantColor2(context), [
+    context,
+  ]);
 
-    let red = 0;
-    let green = 0;
-    let blue = 0;
-
-    for (let i = 0; i < imageData.data.length; i += 400) {
-      red += imageData.data[i];
-      green += imageData.data[i + 1];
-      blue += imageData.data[i + 2];
-    }
-
-    const total = ((width * height) / 400) * 4;
-    const meanRed = Math.floor(red / total);
-    const meanGreen = Math.floor(green / total);
-    const meanBlue = Math.floor(blue / total);
-
-    const rgb = `rgb(${meanRed}, ${meanGreen}, ${meanBlue})`;
-
-    return rgb;
-  }, [context]);
+  const getDominantColor3 = useCallback(() => ggetDominantColor3(context), [
+    context,
+  ]);
 
   useEffect(() => {
     async function loadMovie(): Promise<void> {
@@ -76,7 +58,7 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
     }
 
     loadMovie();
-  }, [match.params.id, getDominantColor]);
+  }, [match.params.id]);
 
   useEffect(() => {
     function doTheThing(): void {
@@ -88,7 +70,12 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
       posterImage.onload = () => {
         // eslint-disable-next-line no-unused-expressions
         context?.drawImage(posterImage, 0, 0);
-        setColor(getDominantColor());
+        const c = getDominantColor();
+
+        console.log(getLuminance(c));
+        console.log(getLuminance(darken(0.3, c)));
+
+        setColor(darken(0.0, c));
       };
       posterImage.src = movie.posterPath;
       posterImage.crossOrigin = 'Anonymous';
@@ -101,18 +88,21 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
     <Container>
       <MovieBanner backgroundUrl={movie.backdropPath} color={color}>
         <MoviePoster>
+          {/* Canvas no stack overflow */}
+          {/* https://stackoverflow.com/questions/60424853/html-canvas-with-react-hooks-and-typescript */}
           <canvas ref={canvasRef} width="300" height="450" />
           <img ref={posterRef} src={movie?.posterPath} alt={movie?.title} />
         </MoviePoster>
 
         <MovieInfo>
           <h1>{movie?.title}</h1>
-          <p>{movie?.tagline}</p>
+          <p className="tagline">{movie?.tagline}</p>
           <strong>Sinopse</strong>
-          <p>{movie?.overview}</p>
-          <p>
-            {movie?.voteAverage * 10}
-            /100
+          <section>{movie?.overview}</section>
+          <p className="rating">
+            <big>{movie?.voteAverage * 10}</big>
+            <small> &#160;% </small>
+            {/* <small> &#160;/ 100</small> */}
           </p>
         </MovieInfo>
       </MovieBanner>
