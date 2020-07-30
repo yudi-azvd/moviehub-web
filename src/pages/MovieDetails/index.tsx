@@ -11,6 +11,8 @@ interface Movie {
   posterPath: string;
   backdropPath?: string;
   voteAverage: number;
+  runtime: number;
+  genres: string[];
 }
 
 type Props = {
@@ -25,8 +27,6 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);
-
-  // useMemo não ta indo direito
 
   useEffect(() => {
     async function loadMovie(): Promise<void> {
@@ -48,13 +48,22 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
 
         <MovieInfo>
           <h1>{movie?.title}</h1>
-          <p className="tagline">{movie?.tagline}</p>
-          <strong>Sinopse</strong>
-          <section>{movie?.overview}</section>
+          <p>
+            {movie?.genres?.map((genre) => (
+              <span key={`${genre}id`}>{`${genre} |`}</span>
+            ))}
+            <span>{movie?.runtime}m</span>
+          </p>
+
           <p className="rating">
             <big>{movie?.voteAverage * 10}</big>
             <small> &#160;/ 100</small>
           </p>
+
+          <p className="tagline">{movie?.tagline}</p>
+
+          <strong>Sinopse</strong>
+          <section>{movie?.overview}</section>
         </MovieInfo>
       </MovieBanner>
     </Container>

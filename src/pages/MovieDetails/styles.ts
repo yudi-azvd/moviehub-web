@@ -19,7 +19,7 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   display: flex;
   align-items: center;
   padding: 30px 50px;
-  background: #333;
+  background: #212121;
   color: #fff;
 
   /* ajuste vertical */
@@ -27,8 +27,8 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   /* Gradiente muda com o resize da página. mas a imagem continua no mesmo tamanho */
   background-image: linear-gradient(
       to right,
-      #333 16.15%,
-      ${transparentize(0.2, '#333')} 100%
+      #212121 16.15%,
+      ${transparentize(0.2, '#212121')} 100%
     ),
     url(${(props) => props.backgroundUrl});
   background-position: left 150px bottom 0;
@@ -66,6 +66,7 @@ export const MovieInfo = styled.div`
   .rating {
     display: flex;
     align-items: center;
+    margin-bottom: 16px;
 
     big,
     small {
