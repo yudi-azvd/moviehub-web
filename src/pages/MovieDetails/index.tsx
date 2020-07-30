@@ -47,21 +47,25 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
         </MoviePoster>
 
         <MovieInfo>
-          <h1>{movie?.title}</h1>
-          <p>
-            {movie?.genres?.map((genre) => (
-              <span key={`${genre}id`}>{`${genre} |`}</span>
-            ))}
-            <span>{movie?.runtime}m</span>
-          </p>
+          <div className="title">
+            <h1>{movie?.title}</h1>
+            <p className="genre-runtime">
+              {movie?.genres?.map((genre) => (
+                <span key={`${genre}id`}>{`${genre} |`}</span>
+              ))}
+              <span> {movie?.runtime}m</span>
+            </p>
+          </div>
 
-          <p className="rating">
-            <big>{movie?.voteAverage * 10}</big>
-            <small> &#160;/ 100</small>
-          </p>
+          <div className="vote-average">
+            <div className="average">
+              <big>{movie?.voteAverage * 10}</big>
+              <small> %</small>
+            </div>
+            <p>Avaliação dos usuários</p>
+          </div>
 
-          <p className="tagline">{movie?.tagline}</p>
-
+          <em className="tagline">{movie?.tagline}</em>
           <strong>Sinopse</strong>
           <section>{movie?.overview}</section>
         </MovieInfo>

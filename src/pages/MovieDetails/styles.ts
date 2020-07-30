@@ -45,32 +45,61 @@ export const MoviePoster = styled.div`
 export const MovieInfo = styled.div`
   margin-left: 50px;
 
-  h1 {
-    font-size: 36px;
+  .title {
+    margin-bottom: 22px;
+
+    h1 {
+      font-size: 36px;
+    }
+
+    p.genre-runtime {
+      opacity: 0.8;
+    }
   }
 
-  p.tagline {
+  .vote-average {
+    margin-bottom: 24px;
+    display: flex;
+
+    .average {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0005;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+
+      big,
+      small {
+        font-weight: bold;
+      }
+
+      big {
+        font-size: 28px;
+      }
+    }
+
+    p {
+      width: 32px;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+  }
+
+  em.tagline {
+    display: block;
     opacity: 0.6;
-    margin-bottom: 30px;
   }
 
   strong {
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 8px;
+    font-size: 22px;
   }
 
   section {
     margin-bottom: 16px;
-  }
-
-  .rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-
-    big,
-    small {
-      font-weight: bold;
-    }
+    font-size: 16px;
   }
 `;
