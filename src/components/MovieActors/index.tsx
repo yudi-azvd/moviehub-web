@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Actor } from './styles';
+import { Container, Actor, UserIcon, DefaultActor } from './styles';
 
 interface ActorProps {
   id: number;
@@ -17,7 +17,7 @@ const MovieActors: React.FC<Props> = ({ actors }: Props) => {
   if (!actors) {
     return (
       <Container>
-        <h2>Carregando elenco...</h2>
+        <h2>Carregando elenco ...</h2>
       </Container>
     );
   }
@@ -32,7 +32,9 @@ const MovieActors: React.FC<Props> = ({ actors }: Props) => {
             {actor.profilePath.endsWith('.jpg') ? (
               <img src={actor.profilePath} alt={actor.name} />
             ) : (
-              <p>oi</p>
+              <DefaultActor>
+                <UserIcon />
+              </DefaultActor>
             )}
             <strong>{actor.name}</strong>
             <span>{actor.character}</span>
