@@ -2,7 +2,21 @@ import React, { useEffect, useState } from 'react';
 
 import api from '../../services/api';
 
-import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
+import {
+  Container,
+  MovieBanner,
+  MoviePoster,
+  MovieInfo,
+  MovieCast,
+  Actor,
+} from './styles';
+
+interface Actor {
+  id: number;
+  character: string;
+  name: string;
+  profilePath: string;
+}
 
 interface Movie {
   title?: string;
@@ -13,6 +27,7 @@ interface Movie {
   voteAverage: number;
   runtime: number;
   genres: string[];
+  cast: Actor[];
 }
 
 type Props = {
@@ -41,8 +56,6 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
     <Container>
       <MovieBanner backgroundUrl={movie.backdropPath}>
         <MoviePoster>
-          {/* Canvas no stack overflow */}
-          {/* https://stackoverflow.com/questions/60424853/html-canvas-with-react-hooks-and-typescript */}
           <img src={movie?.posterPath} alt={movie?.title} />
         </MoviePoster>
 
@@ -70,6 +83,20 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
           <section>{movie?.overview}</section>
         </MovieInfo>
       </MovieBanner>
+
+      <MovieCast>
+        <h2>Elenco principal</h2>
+
+        <div className="scrollable-actors">
+          {movie?.cast?.map((actor) => (
+            <Actor key={actor.id}>
+              <img src={actor.profilePath} alt={actor.name} />
+              <strong>{actor.name}</strong>
+              <span>{actor.character}</span>
+            </Actor>
+          ))}
+        </div>
+      </MovieCast>
     </Container>
   );
 };
