@@ -2,14 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import api from '../../services/api';
 
-import {
-  Container,
-  MovieBanner,
-  MoviePoster,
-  MovieInfo,
-  MovieCast,
-  Actor,
-} from './styles';
+import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
+import MovieActors from '../../components/MovieActors';
 
 interface Actor {
   id: number;
@@ -84,19 +78,7 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
         </MovieInfo>
       </MovieBanner>
 
-      <MovieCast>
-        <h2>Elenco principal</h2>
-
-        <div className="scrollable-actors">
-          {movie?.cast?.map((actor) => (
-            <Actor key={actor.id}>
-              <img src={actor.profilePath} alt={actor.name} />
-              <strong>{actor.name}</strong>
-              <span>{actor.character}</span>
-            </Actor>
-          ))}
-        </div>
-      </MovieCast>
+      <MovieActors actors={movie?.cast} />
     </Container>
   );
 };
