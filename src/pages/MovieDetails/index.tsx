@@ -4,6 +4,7 @@ import api from '../../services/api';
 
 import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 import MovieActors from '../../components/MovieActors';
+import MovieReviews from '../../components/MovieReviews';
 
 interface Actor {
   id: number;
@@ -13,6 +14,7 @@ interface Actor {
 }
 
 interface Movie {
+  id: string;
   title?: string;
   overview?: string;
   tagline?: string;
@@ -79,6 +81,9 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
       </MovieBanner>
 
       <MovieActors actors={movie?.cast} />
+
+      <MovieReviews movieId={match.params.id} />
+      {/* <MovieReviews movieId={movie.id} /> */}
     </Container>
   );
 };
