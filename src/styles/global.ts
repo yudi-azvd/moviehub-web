@@ -21,4 +21,8 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  ul, li {
+    list-style: none;
+  }
 `;
