@@ -23,21 +23,4 @@ export const Review = styled.li`
     display: block;
     margin-bottom: 16px;
   }
-
-  .hide-overflow {
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 12px;
-
-    span.hide {
-      display: none;
-    }
-  }
-
-  button {
-    border: 0;
-    background: transparent;
-    /* color: cyan; */
-    text-decoration: underline;
-  }
 `;
