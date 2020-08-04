@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import getImage from '../../functions/getImage';
 
+import { Container, MovieCard } from './styles';
+
 interface Movie {
   id: number;
   title: string;
@@ -23,17 +25,22 @@ const UpcomingMovies: React.FC = () => {
   }, []);
 
   return (
-    <ul>
-      {movies?.map((movie) => (
-        <li key={movie.id}>
-          {movie.title}
-          <img
-            src={`${getImage('miniPoster', movie.posterPath)}`}
-            alt={movie.title}
-          />
-        </li>
-      ))}
-    </ul>
+    <Container>
+      <h2>Em breve</h2>
+
+      <ul>
+        {movies?.map((movie) => (
+          <MovieCard key={movie.id}>
+            <h3>{movie.title}</h3>
+
+            <img
+              src={`${getImage('miniPoster', movie.posterPath)}`}
+              alt={movie.title}
+            />
+          </MovieCard>
+        ))}
+      </ul>
+    </Container>
   );
 };
 
