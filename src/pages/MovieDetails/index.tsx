@@ -5,6 +5,7 @@ import api from '../../services/api';
 import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 import MovieActors from '../../components/MovieActors';
 import MovieReviews from '../../components/MovieReviews';
+import getImage from '../../functions/getImage';
 
 interface Actor {
   id: number;
@@ -50,9 +51,9 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
 
   return (
     <Container>
-      <MovieBanner backgroundUrl={movie.backdropPath}>
+      <MovieBanner backgroundUrl={getImage('backdrop', movie?.backdropPath)}>
         <MoviePoster>
-          <img src={movie?.posterPath} alt={movie?.title} />
+          <img src={getImage('poster', movie?.posterPath)} alt={movie?.title} />
         </MoviePoster>
 
         <MovieInfo>
