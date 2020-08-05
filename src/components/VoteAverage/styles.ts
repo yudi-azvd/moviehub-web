@@ -13,7 +13,7 @@ export const Container = styled.div<ContainerProps>`
         `
       : ''}
 
-  background: #101010;
+  background: #171717;
   display: flex;
   align-items: center;
   justify-content: center;
