@@ -9,30 +9,39 @@ export const Container = styled.div`
 
   ul {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
   }
 `;
 
 export const MovieCard = styled.li`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
-  background: #0001;
   margin-bottom: 30px;
+  position: relative;
 
-  & + & {
-    margin-left: 20px;
-  }
+  div {
+    width: 150px;
 
-  cursor: pointer;
+    a {
+      text-decoration: none;
+      color: inherit;
 
-  h3 {
-  }
+      img {
+        border-radius: 10px;
+        width: 150px;
+        height: auto;
+      }
 
-  img {
-    border-radius: 10px;
-    width: 150;
-    height: auto;
+      h3 {
+        display: inline-block;
+        margin-top: 22px;
+      }
+    }
+
+    .vote-average {
+      transform: translate(10px, calc(-56%));
+    }
   }
 `;

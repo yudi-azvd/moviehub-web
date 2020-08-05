@@ -6,6 +6,7 @@ import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 import MovieActors from '../../components/MovieActors';
 import MovieReviews from '../../components/MovieReviews';
 import getImage from '../../functions/getImage';
+import VoteAverage from '../../components/VoteAverage';
 
 interface Actor {
   id: number;
@@ -69,10 +70,7 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
           </div>
 
           <div className="vote-average">
-            <div className="average">
-              <big>{movie?.voteAverage * 10}</big>
-              <small> %</small>
-            </div>
+            <VoteAverage voteAverage={movie?.voteAverage} />
             <p>Avaliação dos usuários</p>
           </div>
 

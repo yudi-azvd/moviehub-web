@@ -4,6 +4,7 @@ import api from '../../services/api';
 import getImage from '../../functions/getImage';
 
 import { Container, MovieCard } from './styles';
+import VoteAverage from '../../components/VoteAverage';
 
 interface Movie {
   id: number;
@@ -33,13 +34,22 @@ const UpcomingMovies: React.FC = () => {
         {movies?.map((movie) => (
           <MovieCard key={movie.id}>
             <div>
-              <img
-                src={`${getImage('miniPoster', movie.posterPath)}`}
-                alt={movie.title}
+              <a href={`/movies/${movie.id}`}>
+                <img
+                  src={`${getImage('miniPoster', movie.posterPath)}`}
+                  alt={movie.title}
+                />
+              </a>
+
+              <VoteAverage
+                voteAverage={movie.voteAverage}
+                size={36}
+                positionAbsolute
               />
 
-              <h3>{movie.title}</h3>
-              <p>{movie.voteAverage}</p>
+              <a href={`/movies/${movie.id}`}>
+                <h3>{movie.title}</h3>
+              </a>
             </div>
           </MovieCard>
         ))}
