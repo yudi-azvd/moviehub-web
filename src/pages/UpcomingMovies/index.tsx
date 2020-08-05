@@ -9,6 +9,7 @@ interface Movie {
   id: number;
   title: string;
   posterPath: string;
+  voteAverage: number;
 }
 
 const UpcomingMovies: React.FC = () => {
@@ -31,12 +32,15 @@ const UpcomingMovies: React.FC = () => {
       <ul>
         {movies?.map((movie) => (
           <MovieCard key={movie.id}>
-            <h3>{movie.title}</h3>
+            <div>
+              <img
+                src={`${getImage('miniPoster', movie.posterPath)}`}
+                alt={movie.title}
+              />
 
-            <img
-              src={`${getImage('miniPoster', movie.posterPath)}`}
-              alt={movie.title}
-            />
+              <h3>{movie.title}</h3>
+              <p>{movie.voteAverage}</p>
+            </div>
           </MovieCard>
         ))}
       </ul>
