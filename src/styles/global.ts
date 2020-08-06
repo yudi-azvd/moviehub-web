@@ -25,4 +25,9 @@ export default createGlobalStyle`
   ul, li {
     list-style: none;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;

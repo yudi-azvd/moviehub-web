@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 50px 30px;
+  padding: 30px 50px;
 
   h2 {
     margin-bottom: 12px;
@@ -22,12 +22,9 @@ export const MovieCard = styled.li`
   position: relative;
 
   div {
-    width: 150px;
+    width: 152px;
 
     a {
-      text-decoration: none;
-      color: inherit;
-
       img {
         border-radius: 10px;
         width: 150px;
