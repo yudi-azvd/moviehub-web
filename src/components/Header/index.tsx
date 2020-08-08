@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, SearchBar, UserInfo } from './styles';
+import { Container, UserInfo } from './styles';
 
 interface User {
   name: string;
@@ -18,9 +18,9 @@ const Header: React.FC = () => {
         <a href="/">MOVIEHUB</a>
       </h1>
 
-      <SearchBar>
+      {/* <SearchBar>
         <input type="text" placeholder="Procure por filmes..." />
-      </SearchBar>
+      </SearchBar> */}
 
       {/* não fica alinhado na página principal */}
       <UserInfo>
