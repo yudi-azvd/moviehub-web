@@ -54,31 +54,43 @@ export const MovieInfo = styled.div`
 
     p.genre-runtime {
       opacity: 0.8;
+
+      span.runtime {
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: calc(50% - 3px);
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #fff;
+          opacity: 0.8;
+        }
+      }
+
+      span + span {
+        position: relative;
+        margin-left: 12px;
+
+        &::before {
+          content: '';
+          top: calc(50% - 8px);
+          left: -8px;
+          position: absolute;
+          width: 2px;
+          height: 16px;
+          background: #fff;
+          opacity: 0.8;
+        }
+      }
     }
   }
 
   .vote-average {
     margin-bottom: 24px;
     display: flex;
-
-    .average {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0005;
-      border-radius: 50%;
-      width: 64px;
-      height: 64px;
-
-      big,
-      small {
-        font-weight: bold;
-      }
-
-      big {
-        font-size: 28px;
-      }
-    }
 
     p {
       width: 32px;

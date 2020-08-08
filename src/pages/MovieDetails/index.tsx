@@ -62,10 +62,9 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
             <h1>{movie?.title}</h1>
             <p className="genre-runtime">
               {movie?.genres?.map((genre) => (
-                // class=genre => css: borderleft 1px solid white
-                <span key={`${genre}id`}>{`${genre} | `}</span>
+                <span key={`${genre}id`}>{`${genre}`}</span>
               ))}
-              <span> {movie?.runtime}m</span>
+              <span className="runtime"> {movie?.runtime}m</span>
             </p>
           </div>
 
