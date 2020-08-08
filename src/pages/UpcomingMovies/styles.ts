@@ -21,6 +21,10 @@ export const MovieCard = styled.li`
   margin-bottom: 30px;
   position: relative;
 
+  & + & {
+    margin-left: 27px;
+  }
+
   div {
     width: 152px;
 
