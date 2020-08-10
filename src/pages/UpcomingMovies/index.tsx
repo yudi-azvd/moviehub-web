@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import api from '../../services/api';
-import getImage from '../../functions/getImage';
+import getImage from '../../helpers/getImage';
 
 import { Container, MovieCard } from './styles';
 import VoteAverage from '../../components/VoteAverage';

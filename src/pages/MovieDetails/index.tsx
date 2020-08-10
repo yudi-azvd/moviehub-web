@@ -5,7 +5,7 @@ import api from '../../services/api';
 import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 import MovieActors from '../../components/MovieActors';
 import MovieReviews from '../../components/MovieReviews';
-import getImage from '../../functions/getImage';
+import getImage from '../../helpers/getImage';
 import VoteAverage from '../../components/VoteAverage';
 
 interface Actor {

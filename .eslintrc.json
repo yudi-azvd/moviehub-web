@@ -31,6 +31,10 @@
   ],
   "rules": {
     "import/prefer-default-export": "off",
+    "react/prop-types": "off",
+    "no-unused-expressions": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/extensions": [
       "error",
