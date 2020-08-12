@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import getImage from '../../helpers/getImage';
 
-import { Container, MovieCard } from './styles';
+import { Container, MovieCard, Movies } from './styles';
 import VoteAverage from '../../components/VoteAverage';
 
 interface Movie {
@@ -30,7 +30,7 @@ const UpcomingMovies: React.FC = () => {
     <Container>
       <h2>Em breve</h2>
 
-      <ul>
+      <Movies>
         {movies?.map((movie) => (
           <MovieCard key={movie.id}>
             <div>
@@ -53,7 +53,7 @@ const UpcomingMovies: React.FC = () => {
             </div>
           </MovieCard>
         ))}
-      </ul>
+      </Movies>
     </Container>
   );
 };

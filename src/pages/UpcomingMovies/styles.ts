@@ -1,16 +1,21 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 30px 50px;
+  padding: 16px;
 
-  h2 {
+  > h2 {
     margin-bottom: 12px;
   }
+`;
 
-  ul {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-  }
+export const Movies = styled.ul`
+  display: grid;
+  grid-gap: 1rem;
+  /* grid-gap: 2px; */
+
+  /* 12:14 */
+  /* https://www.youtube.com/watch?v=qm0IfG1GyZU */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 `;
 
 export const MovieCard = styled.li`
@@ -20,10 +25,6 @@ export const MovieCard = styled.li`
 
   margin-bottom: 30px;
   position: relative;
-
-  & + & {
-    margin-left: 27px;
-  }
 
   div {
     width: 152px;
