@@ -4,24 +4,24 @@ import { shade } from 'polished';
 export const Container = styled.div`
   height: 90vh;
   display: flex;
-  align-items: stretch;
+  place-content: center;
 `;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  place-content: center;
+  justify-content: center;
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 360px;
+  padding: 16px;
 
   h1 {
     margin-bottom: 24px;
   }
 
   form {
-    width: 340px;
+    width: 100%;
   }
 
   > a {

@@ -1,9 +1,9 @@
 import React, { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import { FormHandles } from '@unform/core';
 import { Container, Content } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
