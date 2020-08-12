@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin: 30px 50px;
+  padding: 16px;
 
   h2 {
     margin-bottom: 8px;
@@ -9,7 +9,9 @@ export const Container = styled.div`
 `;
 
 export const Reviews = styled.ul`
-  width: 50%;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 export const Review = styled.li`

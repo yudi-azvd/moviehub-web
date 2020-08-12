@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { User } from '@styled-icons/boxicons-solid';
 
 export const Container = styled.div`
-  margin: 30px 50px;
+  padding: 16px;
+
   --image-border-radius: 8px;
 
   div.scrollable-actors {
