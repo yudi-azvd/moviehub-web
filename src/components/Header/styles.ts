@@ -7,6 +7,21 @@ export const Container = styled.div`
   justify-content: space-between;
 
   padding: 30px 50px;
+  padding: 16px;
+
+  > h1.desktop {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    > h1.mobile {
+      display: none;
+    }
+
+    > h1.desktop {
+      display: block;
+    }
+  }
 
   background: #171717;
   color: #fff;
@@ -14,12 +29,6 @@ export const Container = styled.div`
   /* qual dos dois? */
   /* height: 64px; */
   height: 10vh;
-
-  nav ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
 `;
 
 export const SearchBar = styled.div`

@@ -14,8 +14,12 @@ const Header: React.FC = () => {
 
   return (
     <Container>
-      <h1>
+      <h1 className="desktop">
         <a href="/">MOVIEHUB</a>
+      </h1>
+
+      <h1 className="mobile">
+        <a href="/">M</a>
       </h1>
 
       {/* <SearchBar>
