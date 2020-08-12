@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { transparentize } from 'polished';
 
 export const Container = styled.div`
-  /* max-width: 1980px; */
   position: relative;
 `;
 
@@ -15,10 +14,10 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   width: 100%;
   /* se vh diminuir, vai ficar sobrando espaço à esquerda.
   Se estiver num daqueles monitores gigantes, vai faltar imagem. */
-  height: 90vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 30px 50px;
+  padding: 16px;
   background: #212121;
   color: #fff;
 
@@ -34,16 +33,33 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   background-position: left 150px bottom 0;
   /* https://css-tricks.com/positioning-offset-background-images/ */
   background-repeat: no-repeat;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    height: 90vh;
+  }
 `;
 
 export const MoviePoster = styled.div`
   img {
     border-radius: 10px;
+    width: 150px;
+    margin-bottom: 22px;
+
+    @media (min-width: 768px) {
+      width: auto;
+    }
   }
 `;
 
 export const MovieInfo = styled.div`
-  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    display: block;
+    margin-left: 50px;
+  }
 
   .title {
     margin-bottom: 22px;
