@@ -1,16 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, UserInfo } from './styles';
-
-interface User {
-  name: string;
-}
+import { useAuth } from '../../hooks/auth';
 
 const Header: React.FC = () => {
-  const authenticated = false;
-  const user = {
-    name: 'Yudi Yamane',
-  } as User;
+  const { user, signOut } = useAuth();
 
   return (
     <Container>
@@ -26,15 +21,18 @@ const Header: React.FC = () => {
         <input type="text" placeholder="Procure por filmes..." />
       </SearchBar> */}
 
-      {/* não fica alinhado na página principal */}
       <UserInfo>
-        {authenticated ? (
+        {user ? (
           <>
             <strong> {user.name} </strong>
-            <button type="button">Sair</button>
+            <button onClick={() => signOut()} type="button">
+              Sair
+            </button>
           </>
         ) : (
-          <button type="button">Entrar</button>
+          <Link to="/signin">
+            <button type="button">Entrar</button>
+          </Link>
         )}
       </UserInfo>
     </Container>
