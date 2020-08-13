@@ -3,15 +3,15 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 16px;
 
-  > h2 {
-    margin-bottom: 12px;
+  > h1 {
+    margin: 22px 0 36px;
+    text-align: center;
   }
 `;
 
 export const Movies = styled.ul`
   display: grid;
   grid-gap: 1rem;
-  /* grid-gap: 2px; */
 
   /* 12:14 */
   /* https://www.youtube.com/watch?v=qm0IfG1GyZU */

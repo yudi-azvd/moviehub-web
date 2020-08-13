@@ -28,7 +28,7 @@ const UpcomingMovies: React.FC = () => {
 
   return (
     <Container>
-      <h2>Em breve</h2>
+      <h1>Em breve</h1>
 
       <Movies>
         {movies?.map((movie) => (
