@@ -13,32 +13,44 @@ export const Movies = styled.ul`
   display: grid;
   grid-gap: 1rem;
 
+  --card-width: 150px;
+
   /* 12:14 */
   /* https://www.youtube.com/watch?v=qm0IfG1GyZU */
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
 `;
 
 export const MovieCard = styled.li`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
+  box-sizing: content-box;
+  flex-basis: auto;
 
   margin-bottom: 30px;
   position: relative;
 
   div {
-    width: 152px;
+    width: var(--card-width);
 
     a {
       img {
         border-radius: 10px;
-        width: 150px;
-        height: auto;
+        width: var(--card-width);
+        transition: transform 0.1s;
+
+        &:hover {
+          transform: scale(1.05);
+        }
       }
 
       h3 {
         display: inline-block;
         margin-top: 22px;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
