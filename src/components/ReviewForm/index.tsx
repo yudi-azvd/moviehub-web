@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { format } from 'date-fns';
@@ -33,6 +33,7 @@ interface Props {
 }
 
 const ReviewForm: React.FC<Props> = ({ movieId, reviews, setReviews }) => {
+  const [openedForm, setOpenedForm] = useState(false);
   const { user } = useAuth();
   const formRef = useRef<FormHandles>(null);
 
@@ -73,18 +74,24 @@ const ReviewForm: React.FC<Props> = ({ movieId, reviews, setReviews }) => {
 
   return (
     <Container>
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <Textarea name="content" />
+      {openedForm ? (
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <Textarea name="content" />
 
-        <div className="buttons">
-          <Button className="save" type="submit">
-            Salvar resenha
-          </Button>
-          {/* <Button className="cancel" type="submit">
-            Cancelar
-          </Button> */}
-        </div>
-      </Form>
+          <div className="buttons">
+            <Button className="save" type="submit">
+              Salvar resenha
+            </Button>
+            <Button onClick={() => setOpenedForm(false)} className="cancel">
+              Cancelar
+            </Button>
+          </div>
+        </Form>
+      ) : (
+        <Button onClick={() => setOpenedForm(true)} className="write">
+          Ecrever uma resenha
+        </Button>
+      )}
     </Container>
   );
 };
