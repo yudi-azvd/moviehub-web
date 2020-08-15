@@ -61,7 +61,7 @@ const SignIn: React.FC = () => {
           <Button type="submit">Entrar</Button>
         </Form>
 
-        <Link to="/signin">Ainda não possuo uma conta</Link>
+        <Link to="/signup">Ainda não possuo uma conta</Link>
       </Content>
     </Container>
   );

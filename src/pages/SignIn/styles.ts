@@ -25,14 +25,14 @@ export const Content = styled.div`
   }
 
   > a {
+    color: #0366d6;
     margin-top: 32px;
     display: block;
 
     transition: color 0.2s, transform 0.2s;
 
     &:hover {
-      /* #0366d6 */
-      color: ${shade(0.2, '#171717')};
+      color: ${shade(0.2, '#0366d6')};
       transform: translateY(-2px);
     }
   }

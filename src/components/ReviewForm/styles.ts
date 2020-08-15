@@ -7,10 +7,4 @@ export const Container = styled.div`
     padding-left: 36px;
     width: 50%;
   }
-
-  > form {
-    button {
-      /* background: #0366d6; */
-    }
-  }
 `;
