@@ -49,7 +49,7 @@ const MovieReviews: React.FC<Props> = ({ movieId }: Props) => {
     <Container>
       <h2>Resenhas ({reviews.length}) </h2>
 
-      <Content>
+      <Content hasReviewForm={!!user}>
         {reviews?.length === 0 ? (
           <>
             <p>Esse filme ainda não tem resenhas</p>

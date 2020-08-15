@@ -8,10 +8,14 @@ export const Container = styled.div`
   }
 `;
 
-export const Content = styled.div`
+interface ContentProps {
+  hasReviewForm?: boolean;
+}
+
+export const Content = styled.div<ContentProps>`
   @media (min-width: 768px) {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: ${(props) => (props.hasReviewForm ? 'row-reverse' : 'row')};
     justify-content: space-between;
   }
 `;
