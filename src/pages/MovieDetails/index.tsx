@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import api from '../../services/api';
 
-import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 import MovieActors from '../../components/MovieActors';
 import MovieReviews from '../../components/MovieReviews';
 import getImage from '../../helpers/getImage';
 import VoteAverage from '../../components/VoteAverage';
+
+import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 
 interface Actor {
   id: number;
@@ -36,7 +37,7 @@ type Props = {
   };
 };
 
-const MovieDetails: React.FC<Props> = ({ match }: Props) => {
+const MovieDetails: React.FC<Props> = ({ match }) => {
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);

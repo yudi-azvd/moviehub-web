@@ -8,6 +8,14 @@ export const Container = styled.div`
   }
 `;
 
+export const Content = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+`;
+
 export const Reviews = styled.ul`
   @media (min-width: 768px) {
     width: 50%;
@@ -20,6 +28,7 @@ export const Review = styled.li`
   border-radius: 8px;
   border: 1px solid #eee;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #fff;
 
   transition: box-shadow 0.2s;
 
@@ -33,11 +42,15 @@ export const Review = styled.li`
     margin-bottom: 16px;
   }
 
-  > time {
-    color: #0005;
-  }
-
   > div {
     line-height: 22px;
+  }
+
+  > section {
+    text-align: right;
+
+    > time {
+      color: #0005;
+    }
   }
 `;

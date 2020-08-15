@@ -6,14 +6,14 @@ import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import ReviewForm from '../ReviewForm';
 
-import { Container, Reviews, Review } from './styles';
+import { Container, Reviews, Review, Content } from './styles';
 
 interface Review {
   author: string;
   content: string;
   tmdbId?: number;
   id?: number;
-  created_at: string;
+  created_at?: string;
   formattedCreatedAt?: string;
 }
 
@@ -49,25 +49,41 @@ const MovieReviews: React.FC<Props> = ({ movieId }: Props) => {
     <Container>
       <h2>Resenhas ({reviews.length}) </h2>
 
-      {reviews?.length === 0 ? (
-        <>
-          <p>Esse filme ainda não tem resenhas</p>
-          {user && <ReviewForm movieId={movieId} />}
-        </>
-      ) : (
-        <>
-          {user && <ReviewForm movieId={movieId} />}
-          <Reviews>
-            {reviews?.map((review) => (
-              <Review key={`${review.tmdbId}-${review.id}`}>
-                <strong>{review.author} </strong>
-                <time> {review.formattedCreatedAt} </time>
-                <div>{review.content}</div>
-              </Review>
-            ))}
-          </Reviews>
-        </>
-      )}
+      <Content>
+        {reviews?.length === 0 ? (
+          <>
+            <p>Esse filme ainda não tem resenhas</p>
+            {user && (
+              <ReviewForm
+                movieId={movieId}
+                reviews={reviews}
+                setReviews={setReviews}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {user && (
+              <ReviewForm
+                movieId={movieId}
+                reviews={reviews}
+                setReviews={setReviews}
+              />
+            )}
+            <Reviews>
+              {reviews?.map((review) => (
+                <Review key={`${review.tmdbId}-${review.id}`}>
+                  <strong>{review.author} </strong>
+                  <div>{review.content}</div>
+                  <section>
+                    <time> {review.formattedCreatedAt} </time>
+                  </section>
+                </Review>
+              ))}
+            </Reviews>
+          </>
+        )}
+      </Content>
     </Container>
   );
 };

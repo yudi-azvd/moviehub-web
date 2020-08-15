@@ -39,6 +39,7 @@ export const Actor = styled.div`
   margin-right: 16px;
   padding-bottom: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
 
   img,
   strong,
