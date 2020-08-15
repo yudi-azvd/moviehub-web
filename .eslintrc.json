@@ -30,6 +30,8 @@
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/camelcase": "off",
+    "camelcase": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "no-unused-expressions": "off",
@@ -47,9 +49,6 @@
     "@typescript-eslint/explicit-function-return-type": [
       "error", { "allowExpressions": true }
     ]
-    // "react/jsx-one-expression-per-line": [<enabled>,
-    //   { "allow": "none"|"literal"|"single-child" }
-    // ]
   },
   "settings": {
     "import/resolver": {

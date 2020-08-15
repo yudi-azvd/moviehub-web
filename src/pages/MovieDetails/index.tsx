@@ -82,7 +82,6 @@ const MovieDetails: React.FC<Props> = ({ match }: Props) => {
       <MovieActors actors={movie?.cast} />
 
       <MovieReviews movieId={match.params.id} />
-      {/* <MovieReviews movieId={movie.id} /> */}
     </Container>
   );
 };

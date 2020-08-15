@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 16px;
 
-  h2 {
+  > h2 {
     margin-bottom: 8px;
   }
 `;
@@ -27,13 +27,17 @@ export const Review = styled.li`
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
-  strong {
+  > strong {
     text-transform: uppercase;
     display: block;
     margin-bottom: 16px;
   }
 
-  div {
+  > time {
+    color: #0005;
+  }
+
+  > div {
     line-height: 22px;
   }
 `;
