@@ -5,6 +5,7 @@ import MovieDetails from '../pages/MovieDetails';
 import UpcomingMovies from '../pages/UpcomingMovies';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
+import Profile from '../pages/Profile';
 
 const Router: React.FC = () => (
   <Switch>
@@ -14,6 +15,8 @@ const Router: React.FC = () => (
     <Route path="/signin" component={SignIn} />
 
     <Route exact path="/movies/:id" component={MovieDetails} />
+    {/* ESSA ROTA DEVE SER _PRIVADA_ */}
+    <Route path="/profile" component={Profile} />
   </Switch>
 );
 

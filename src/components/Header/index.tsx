@@ -24,7 +24,9 @@ const Header: React.FC = () => {
       <UserInfo>
         {user ? (
           <>
-            <strong> {user.name} </strong>
+            <Link to="/profile">
+              <strong> {user.name} </strong>
+            </Link>
             <button onClick={() => signOut()} type="button">
               Sair
             </button>
