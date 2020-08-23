@@ -17,12 +17,12 @@ export const MoviesList = styled.ul`
 
   li + li {
     margin-top: 12px;
+  }
 
-    a {
-      &:hover,
-      &:focus {
-        text-decoration: underline;
-      }
+  li a {
+    &:hover,
+    &:focus {
+      text-decoration: underline;
     }
   }
 `;
