@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 
-import { Container } from './styles';
+import { Container, MoviesList } from './styles';
 
 const Profile: React.FC = () => {
   const { user } = useAuth();
@@ -10,13 +11,18 @@ const Profile: React.FC = () => {
   return (
     <Container>
       <h1>Meu Perfil</h1>
-      <h3>{user.name}</h3>
+      <h2>{user.name}</h2>
 
-      <ul>
+      <MoviesList>
+        <h3>Meus filmes favoritos</h3>
         {user.favoriteMovies?.map((movie) => (
-          <li key={`m-${movie.id}`}> {movie.title} </li>
+          <li>
+            <Link key={`m-${movie.id}`} to={`/movies/${movie.id}`}>
+              {movie.title}
+            </Link>
+          </li>
         ))}
-      </ul>
+      </MoviesList>
     </Container>
   );
 };
