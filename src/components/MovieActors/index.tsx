@@ -1,13 +1,8 @@
 import React from 'react';
 
-import { Container, Actor, UserIcon, DefaultActor } from './styles';
+import { Actor as ActorProps } from '../../entities';
 
-interface ActorProps {
-  id: number;
-  character: string;
-  name: string;
-  profilePath: string;
-}
+import { Container, Actor, UserIcon, DefaultActor } from './styles';
 
 interface Props {
   actors: ActorProps[];

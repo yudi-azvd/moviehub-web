@@ -1,11 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Container, UserInfo } from './styles';
 import { useAuth } from '../../hooks/auth';
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
+  const history = useHistory();
+
+  const handleSignOut = useCallback(() => {
+    signOut();
+
+    history.push('/');
+  }, [history, signOut]);
 
   return (
     <Container>
@@ -27,7 +34,7 @@ const Header: React.FC = () => {
             <Link to="/profile">
               <strong> {user.name} </strong>
             </Link>
-            <button onClick={() => signOut()} type="button">
+            <button onClick={handleSignOut} type="button">
               Sair
             </button>
           </>
