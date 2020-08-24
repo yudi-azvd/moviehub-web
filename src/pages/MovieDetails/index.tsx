@@ -9,7 +9,15 @@ import MovieReviews from '../../components/MovieReviews';
 import getImage from '../../helpers/getImage';
 import VoteAverage from '../../components/VoteAverage';
 
-import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
+import {
+  Container,
+  MovieBanner,
+  MoviePoster,
+  MovieInfo,
+  FavoriteIcon,
+  NotFavoriteIcon,
+} from './styles';
+import { useAuth } from '../../hooks/auth';
 
 type Props = {
   match: {
@@ -20,9 +28,13 @@ type Props = {
 };
 
 const MovieDetails: React.FC<Props> = ({ match }) => {
+  const { user } = useAuth();
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);
+  const [movieIsFavorite, setMovieIsFavorite] = useState(
+    !!user.favoriteMovies?.find((userFavMovie) => userFavMovie.id === movie.id),
+  );
 
   useEffect(() => {
     async function loadMovie(): Promise<void> {
@@ -42,7 +54,11 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
 
         <MovieInfo>
           <div className="title">
-            <h1>{movie?.title}</h1>
+            <div className="header">
+              {movieIsFavorite ? <FavoriteIcon /> : <NotFavoriteIcon />}
+              <h1>{movie?.title}</h1>
+            </div>
+
             <p className="genre-runtime">
               {movie?.genres?.map((genre) => (
                 <span key={`${genre}id`}>{`${genre}`}</span>
