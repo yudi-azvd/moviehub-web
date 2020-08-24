@@ -3,26 +3,33 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 
-import { Container, MoviesList } from './styles';
+import {
+  Container,
+  FavoriteMoviesList,
+  FavoriteMovie,
+  DeleteIcon,
+} from './styles';
 
 const Profile: React.FC = () => {
   const { user } = useAuth();
 
   return (
     <Container>
-      <h1>Meu Perfil</h1>
-      <h2>{user.name}</h2>
+      <h2>Meu Perfil</h2>
+      <h1>{user.name}</h1>
 
-      <MoviesList>
+      <FavoriteMoviesList>
         <h3>Meus filmes favoritos</h3>
+
         {user.favoriteMovies?.map((movie) => (
-          <li>
-            <Link key={`m-${movie.id}`} to={`/movies/${movie.id}`}>
-              {movie.title}
-            </Link>
-          </li>
+          <FavoriteMovie key={`m-${movie.id}`}>
+            <button type="button">
+              <DeleteIcon />
+            </button>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </FavoriteMovie>
         ))}
-      </MoviesList>
+      </FavoriteMoviesList>
     </Container>
   );
 };
