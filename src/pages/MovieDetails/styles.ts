@@ -78,8 +78,8 @@ export const MovieInfo = styled.div`
           content: '';
           position: absolute;
           top: calc(50% - 3px);
-          width: 8px;
-          height: 8px;
+          width: 7px;
+          height: 7px;
           border-radius: 50%;
           background: #fff;
           opacity: 0.8;
@@ -95,7 +95,7 @@ export const MovieInfo = styled.div`
           top: calc(50% - 8px);
           left: -8px;
           position: absolute;
-          width: 2px;
+          width: 1.5px;
           height: 16px;
           background: #fff;
           opacity: 0.8;
