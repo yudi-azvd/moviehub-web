@@ -6,7 +6,7 @@ export interface Actor {
 }
 
 export interface Movie {
-  id: string;
+  id: number;
   title?: string;
   overview?: string;
   tagline?: string;
