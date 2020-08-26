@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import api from '../../services/api';
 
 import { Movie } from '../../entities';
 
+import { useAuth } from '../../hooks/auth';
+
+import FavoriteIcon from '../../components/FavoriteIcon';
 import MovieActors from '../../components/MovieActors';
 import MovieReviews from '../../components/MovieReviews';
 import getImage from '../../helpers/getImage';
 import VoteAverage from '../../components/VoteAverage';
 
-import {
-  Container,
-  MovieBanner,
-  MoviePoster,
-  MovieInfo,
-  FavoriteIcon,
-  NotFavoriteIcon,
-} from './styles';
-import { useAuth } from '../../hooks/auth';
+import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 
 type Props = {
   match: {
@@ -28,7 +23,7 @@ type Props = {
 };
 
 const MovieDetails: React.FC<Props> = ({ match }) => {
-  const { user } = useAuth();
+  const { user, addUserFavoriteMovie, removeUserFavoriteMovie } = useAuth();
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);
@@ -45,6 +40,21 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
     loadMovie();
   }, [match.params.id]);
 
+  const handleClickFavoriteIcon = useCallback(
+    (wasFavorite: boolean) => {
+      console.log('handle click top level');
+
+      if (wasFavorite) {
+        addUserFavoriteMovie({ userId: user.id, movieId: movie.id });
+      } else {
+        removeUserFavoriteMovie({ userId: user.id, movieId: movie.id });
+      }
+
+      setMovieIsFavorite(!wasFavorite);
+    },
+    [addUserFavoriteMovie, removeUserFavoriteMovie, user.id, movie.id],
+  );
+
   return (
     <Container>
       <MovieBanner backgroundUrl={getImage('backdrop', movie?.backdropPath)}>
@@ -55,7 +65,10 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
         <MovieInfo>
           <div className="title">
             <div className="header">
-              {movieIsFavorite ? <FavoriteIcon /> : <NotFavoriteIcon />}
+              <FavoriteIcon
+                onClick={handleClickFavoriteIcon}
+                isActive={!!user && movieIsFavorite}
+              />
               <h1>{movie?.title}</h1>
             </div>
 

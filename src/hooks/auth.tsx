@@ -3,10 +3,16 @@ import React, { useState, createContext, useContext, useCallback } from 'react';
 import { Movie } from '../entities';
 import api from '../services/api';
 
+interface UserFavoriteMovie {
+  userId: number;
+  movieId: number;
+}
+
 interface User {
   id: number;
   name: string;
   email: string;
+  // array de movie IDs
   favoriteMovies?: Movie[];
 }
 
@@ -18,11 +24,6 @@ interface AuthState {
 interface SignInCredentials {
   email: string;
   password: string;
-}
-
-interface UserFavoriteMovie {
-  userId: number;
-  movieId: number;
 }
 
 interface AuthContextInterface {
