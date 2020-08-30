@@ -14,7 +14,7 @@ const Router: React.FC = () => (
     <Route path="/signup" component={SignUp} />
     <Route path="/signin" component={SignIn} />
 
-    <Route exact path="/movies/:id" component={MovieDetails} />
+    <Route exact path="/movies/:movieId" component={MovieDetails} />
     {/* ESSA ROTA DEVE SER _PRIVADA_ */}
     <Route path="/profile" component={Profile} />
   </Switch>

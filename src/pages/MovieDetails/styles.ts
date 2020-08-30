@@ -68,7 +68,10 @@ export const MovieInfo = styled.div`
     .header {
       display: flex;
       align-items: center;
-      /* justify-content: space-between; */
+
+      /* > svg {
+        trans
+      } */
 
       h1 {
         font-size: 36px;

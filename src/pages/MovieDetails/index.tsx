@@ -5,6 +5,7 @@ import api from '../../services/api';
 import { Movie } from '../../entities';
 
 import { useAuth } from '../../hooks/auth';
+import { useFavoriteMovies } from '../../hooks/favoriteMovies';
 
 import FavoriteIcon from '../../components/FavoriteIcon';
 import MovieActors from '../../components/MovieActors';
@@ -14,45 +15,52 @@ import VoteAverage from '../../components/VoteAverage';
 
 import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 
-type Props = {
+interface Props {
   match: {
     params: {
-      id: string;
+      movieId: string;
     };
   };
-};
+}
 
 const MovieDetails: React.FC<Props> = ({ match }) => {
-  const { user, addUserFavoriteMovie, removeUserFavoriteMovie } = useAuth();
+  const { user } = useAuth();
+
+  const {
+    addUserFavoriteMovie,
+    removeUserFavoriteMovie,
+    isMovieFavorite,
+  } = useFavoriteMovies();
+
   const [movie, setMovie] = useState<Movie>({
     voteAverage: 0,
   } as Movie);
+
   const [movieIsFavorite, setMovieIsFavorite] = useState(
-    !!user.favoriteMovies?.find((userFavMovie) => userFavMovie.id === movie.id),
+    () => !!user && isMovieFavorite(parseInt(match.params.movieId, 10)),
   );
 
   useEffect(() => {
     async function loadMovie(): Promise<void> {
-      const response = await api.get<Movie>(`/movies/${match.params.id}`);
-      setMovie(response.data);
+      const { data } = await api.get<Movie>(`/movies/${match.params.movieId}`);
+
+      setMovie(data);
     }
 
     loadMovie();
-  }, [match.params.id]);
+  }, [match.params.movieId, movie.id, isMovieFavorite, user]);
 
   const handleClickFavoriteIcon = useCallback(
-    (wasFavorite: boolean) => {
-      console.log('handle click top level');
-
-      if (wasFavorite) {
-        addUserFavoriteMovie({ userId: user.id, movieId: movie.id });
+    (isCurrentlyFavorite: boolean) => {
+      if (isCurrentlyFavorite) {
+        removeUserFavoriteMovie(movie.id);
       } else {
-        removeUserFavoriteMovie({ userId: user.id, movieId: movie.id });
+        addUserFavoriteMovie({ id: movie.id, title: movie.title });
       }
 
-      setMovieIsFavorite(!wasFavorite);
+      setMovieIsFavorite(!isCurrentlyFavorite);
     },
-    [addUserFavoriteMovie, removeUserFavoriteMovie, user.id, movie.id],
+    [addUserFavoriteMovie, removeUserFavoriteMovie, movie.id, movie.title],
   );
 
   return (
@@ -67,7 +75,7 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
             <div className="header">
               <FavoriteIcon
                 onClick={handleClickFavoriteIcon}
-                isActive={!!user && movieIsFavorite}
+                isActive={movieIsFavorite}
               />
               <h1>{movie?.title}</h1>
             </div>
@@ -93,7 +101,7 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
 
       <MovieActors actors={movie?.cast} />
 
-      <MovieReviews movieId={match.params.id} />
+      <MovieReviews movieId={match.params.movieId} />
     </Container>
   );
 };
