@@ -18,9 +18,16 @@ interface SignInCredentials {
   password: string;
 }
 
+interface SignUpCredentials {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface AuthContextInterface {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signUpAndSignIn(credentials: SignUpCredentials): Promise<void>;
   signOut(): void;
 }
 
@@ -45,7 +52,7 @@ const AuthProvider: React.FC = ({ children }) => {
     };
   });
 
-  const signIn = useCallback(async ({ email, password }) => {
+  const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await api.post('/sessions', {
       email,
       password,
@@ -61,6 +68,15 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
+  const signUpAndSignIn = useCallback(
+    async ({ name, email, password }: SignUpCredentials) => {
+      await api.post('/users', { name, email, password });
+
+      await signIn({ email, password });
+    },
+    [signIn],
+  );
+
   const signOut = useCallback(() => {
     localStorage.removeItem('@moviehub:token');
     localStorage.removeItem('@moviehub:user');
@@ -75,6 +91,7 @@ const AuthProvider: React.FC = ({ children }) => {
       value={{
         user: data.user,
         signIn,
+        signUpAndSignIn,
         signOut,
       }}
     >

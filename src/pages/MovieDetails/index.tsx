@@ -64,8 +64,14 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
 
       if (isCurrentlyFavorite) {
         removeUserFavoriteMovie(movie.id);
+        toast('Filme removido dos favoritos com sucesso', {
+          type: 'info',
+        });
       } else {
         addUserFavoriteMovie({ id: movie.id, title: movie.title });
+        toast('Filme adicionado aos favoritos com sucesso', {
+          type: 'success',
+        });
       }
 
       setMovieIsFavorite(!isCurrentlyFavorite);
