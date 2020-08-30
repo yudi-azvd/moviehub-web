@@ -4,12 +4,16 @@ import { MdDelete } from 'react-icons/md';
 export const Container = styled.div`
   padding: 16px;
 
+  @media (min-width: 768px) {
+    padding: 30px 50px;
+  }
+
   h2 {
     color: #333;
   }
 
   h1 {
-    margin-bottom: 16px;
+    margin-bottom: 36px;
   }
 `;
 
