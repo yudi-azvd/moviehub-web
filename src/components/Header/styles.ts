@@ -63,4 +63,17 @@ export const UserInfo = styled.div`
   strong {
     display: block;
   }
+
+  button,
+  strong {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  button:hover,
+  button:focus,
+  strong:hover,
+  strong:focus {
+    opacity: 1;
+  }
 `;
