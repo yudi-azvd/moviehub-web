@@ -101,15 +101,8 @@ const FavoriteMoviesProvider: React.FC = ({ children }) => {
   );
 
   const isMovieFavorite = useCallback(
-    (movieId: number) => {
-      console.log(
-        { favoriteMovies, movieId },
-        !!favoriteMovies.find((favMovie) => favMovie.id === movieId),
-        favoriteMovies[0],
-      );
-
-      return !!favoriteMovies.find((favMovie) => favMovie.id === movieId);
-    },
+    (movieId: number) =>
+      !!favoriteMovies.find((favMovie) => favMovie.id === movieId),
     [favoriteMovies],
   );
 
