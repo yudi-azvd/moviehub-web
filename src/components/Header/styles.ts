@@ -6,7 +6,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  padding: 30px 50px;
   padding: 16px;
 
   > h1.desktop {
@@ -14,6 +13,8 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) {
+    padding: 30px 50px;
+
     > h1.mobile {
       display: none;
     }

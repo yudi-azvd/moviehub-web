@@ -38,6 +38,7 @@ export const MovieBanner = styled.div<MovieBannerProps>`
   @media (min-width: 768px) {
     flex-direction: row;
     height: 90vh;
+    padding: 30px 50px;
   }
 `;
 
