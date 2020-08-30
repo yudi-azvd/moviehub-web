@@ -9,7 +9,6 @@ export const Container = styled.div`
 
   > h1 {
     margin: 22px 0 36px;
-    text-align: center;
   }
 `;
 
