@@ -29,11 +29,24 @@ export const FavoriteMovie = styled.li`
   }
 
   > a {
+    position: relative;
     transition: opacity 0.2s;
+    margin-left: 8px;
 
     &:hover,
     &:focus {
       text-decoration: underline;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 0px;
+      background: #000;
+      top: calc(50% + 1px);
+
+      transition: width 0.2s ease-out;
     }
   }
 
@@ -41,10 +54,15 @@ export const FavoriteMovie = styled.li`
   aplique esse estilo na âncora irmã */
   button:hover ~ a {
     opacity: 0.5;
+
+    &::before {
+      width: 100%;
+      background: #000;
+    }
   }
 
   button {
-    margin-right: 8px;
+    /* margin-right: 8px; */
     background: transparent;
     outline: none;
     border: 0;
