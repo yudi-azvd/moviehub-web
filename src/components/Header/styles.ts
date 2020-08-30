@@ -6,7 +6,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  padding: 30px 50px;
   padding: 16px;
 
   > h1.desktop {
@@ -14,6 +13,8 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) {
+    padding: 30px 50px;
+
     > h1.mobile {
       display: none;
     }
@@ -61,5 +62,18 @@ export const UserInfo = styled.div`
 
   strong {
     display: block;
+  }
+
+  button,
+  strong {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  button:hover,
+  button:focus,
+  strong:hover,
+  strong:focus {
+    opacity: 1;
   }
 `;

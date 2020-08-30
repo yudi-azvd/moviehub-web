@@ -1,13 +1,11 @@
 import React, { useState, createContext, useContext, useCallback } from 'react';
 
-import { Movie } from '../entities';
 import api from '../services/api';
 
 interface User {
   id: number;
   name: string;
   email: string;
-  favoriteMovies?: Movie[];
 }
 
 interface AuthState {
@@ -20,17 +18,10 @@ interface SignInCredentials {
   password: string;
 }
 
-interface UserFavoriteMovie {
-  userId: number;
-  movieId: number;
-}
-
 interface AuthContextInterface {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
-  addUserFavoriteMovie(data: UserFavoriteMovie): Promise<void>;
-  removeUserFavoriteMovie(data: UserFavoriteMovie): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextInterface>(
@@ -79,51 +70,12 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
-  const addUserFavoriteMovie = useCallback(async ({ userId, movieId }) => {
-    await api.post(`/users/${userId}/favorite_movies`, {
-      movie_id: movieId,
-    });
-  }, []);
-
-  const removeUserFavoriteMovie = useCallback(
-    async ({ userId, movieId }) => {
-      await api.delete(`/users/${userId}/favorite_movies/`, {
-        data: {
-          movie_id: movieId,
-        },
-      });
-
-      const remainingFavoriteMovies = data.user.favoriteMovies?.filter(
-        (movie) => movie.id !== movieId,
-      );
-
-      localStorage.setItem(
-        '@moviehub:user',
-        JSON.stringify({
-          ...data.user,
-          favoriteMovies: remainingFavoriteMovies,
-        }),
-      );
-
-      setData({
-        ...data,
-        user: {
-          ...data.user,
-          favoriteMovies: remainingFavoriteMovies,
-        },
-      });
-    },
-    [data],
-  );
-
   return (
     <AuthContext.Provider
       value={{
         user: data.user,
         signIn,
         signOut,
-        addUserFavoriteMovie,
-        removeUserFavoriteMovie,
       }}
     >
       {children}

@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 16px;
 
+  @media (min-width: 768px) {
+    padding: 30px 50px;
+  }
+
   > h1 {
     margin: 22px 0 36px;
     text-align: center;
