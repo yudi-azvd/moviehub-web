@@ -28,6 +28,7 @@ const FavoriteMoviesContext = createContext<FavoriteMoviesInterface>(
 
 const FavoriteMoviesProvider: React.FC = ({ children }) => {
   const { user } = useAuth();
+
   const [favoriteMovies, setFavoriteMovies] = useState<SimpleMovie[]>(() => {
     if (!user) return [];
 
@@ -62,6 +63,8 @@ const FavoriteMoviesProvider: React.FC = ({ children }) => {
 
   const addUserFavoriteMovie = useCallback(
     async (simpleMovie: SimpleMovie) => {
+      if (!user) return;
+
       await api.post(`/users/${user.id}/favorite_movies`, {
         movie_id: simpleMovie.id,
       });
@@ -80,6 +83,8 @@ const FavoriteMoviesProvider: React.FC = ({ children }) => {
 
   const removeUserFavoriteMovie = useCallback(
     async (movieId: number) => {
+      if (!user) return;
+
       await api.delete(`/users/${user.id}/favorite_movies/`, {
         data: {
           movie_id: movieId,
