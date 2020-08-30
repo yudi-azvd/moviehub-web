@@ -52,6 +52,13 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
 
   const handleClickFavoriteIcon = useCallback(
     (isCurrentlyFavorite: boolean) => {
+      if (!user) {
+        console.log(
+          'entre ou crie uma conta pra adicionar um filme aos favoritos',
+        );
+        return;
+      }
+
       if (isCurrentlyFavorite) {
         removeUserFavoriteMovie(movie.id);
       } else {
@@ -60,7 +67,13 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
 
       setMovieIsFavorite(!isCurrentlyFavorite);
     },
-    [addUserFavoriteMovie, removeUserFavoriteMovie, movie.id, movie.title],
+    [
+      addUserFavoriteMovie,
+      removeUserFavoriteMovie,
+      movie.id,
+      movie.title,
+      user,
+    ],
   );
 
   return (
