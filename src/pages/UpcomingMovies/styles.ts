@@ -34,13 +34,13 @@ export const MovieCard = styled.li`
   position: relative;
 
   div {
-    width: var(--card-width);
+    width: 100%;
 
     a {
       img {
         border-radius: 10px;
-        width: var(--card-width);
-        transition: transform 0.1s;
+        width: 100%;
+        transition: transform 0.2s ease-out;
 
         &:hover {
           transform: scale(1.05);

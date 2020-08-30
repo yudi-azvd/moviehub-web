@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 
@@ -53,16 +54,24 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
   const handleClickFavoriteIcon = useCallback(
     (isCurrentlyFavorite: boolean) => {
       if (!user) {
-        console.log(
-          'entre ou crie uma conta pra adicionar um filme aos favoritos',
+        toast(
+          'Entre ou crie uma conta para adicionar um filme aos favoritos!',
+          { type: 'info' },
         );
+
         return;
       }
 
       if (isCurrentlyFavorite) {
         removeUserFavoriteMovie(movie.id);
+        toast('Filme removido dos favoritos com sucesso', {
+          type: 'info',
+        });
       } else {
         addUserFavoriteMovie({ id: movie.id, title: movie.title });
+        toast('Filme adicionado aos favoritos com sucesso', {
+          type: 'success',
+        });
       }
 
       setMovieIsFavorite(!isCurrentlyFavorite);
