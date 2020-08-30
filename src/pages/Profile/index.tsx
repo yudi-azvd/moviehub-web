@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
+import { useFavoriteMovies } from '../../hooks/favoriteMovies';
 
 import {
   Container,
@@ -11,7 +12,8 @@ import {
 } from './styles';
 
 const Profile: React.FC = () => {
-  const { user, removeUserFavoriteMovie } = useAuth();
+  const { user } = useAuth();
+  const { favoriteMovies, removeUserFavoriteMovie } = useFavoriteMovies();
 
   return (
     <Container>
@@ -21,20 +23,15 @@ const Profile: React.FC = () => {
       <FavoriteMoviesList>
         <h3>Meus filmes favoritos</h3>
 
-        {user.favoriteMovies?.length === 0 ? (
+        {favoriteMovies?.length === 0 ? (
           <span> Você ainda não possui filmes favoritos </span>
         ) : (
           <>
-            {user.favoriteMovies?.map((movie) => (
+            {favoriteMovies?.map((movie) => (
               <FavoriteMovie key={`m-${movie.id}`}>
                 <button
                   type="button"
-                  onClick={() =>
-                    removeUserFavoriteMovie({
-                      userId: user.id,
-                      movieId: movie.id,
-                    })
-                  }
+                  onClick={() => removeUserFavoriteMovie(movie.id)}
                 >
                   <DeleteIcon />
                 </button>

@@ -5,9 +5,14 @@ export interface Actor {
   profilePath: string;
 }
 
+export interface SimpleMovie {
+  id: number;
+  title: string;
+}
+
 export interface Movie {
   id: number;
-  title?: string;
+  title: string;
   overview?: string;
   tagline?: string;
   posterPath: string;

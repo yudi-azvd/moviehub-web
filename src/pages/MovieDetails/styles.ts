@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
+import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 
 export const Container = styled.div`
   position: relative;
@@ -64,8 +65,18 @@ export const MovieInfo = styled.div`
   .title {
     margin-bottom: 22px;
 
-    h1 {
-      font-size: 36px;
+    .header {
+      display: flex;
+      align-items: center;
+
+      /* > svg {
+        trans
+      } */
+
+      h1 {
+        font-size: 36px;
+        margin-left: 16px;
+      }
     }
 
     p.genre-runtime {
@@ -129,5 +140,26 @@ export const MovieInfo = styled.div`
   section {
     margin-bottom: 16px;
     font-size: 16px;
+  }
+`;
+
+const iconCSS = css`
+  width: 28px;
+  height: 28px;
+
+  cursor: pointer;
+`;
+
+export const FavoriteIcon = styled(MdFavorite)`
+  ${iconCSS}
+`;
+
+export const NotFavoriteIcon = styled(MdFavoriteBorder)`
+  ${iconCSS}
+
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
   }
 `;
