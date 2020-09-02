@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, ReactPropTypes } from 'react';
 import { toast } from 'react-toastify';
 
 import api from '../../services/api';
@@ -16,15 +16,21 @@ import VoteAverage from '../../components/VoteAverage';
 
 import { Container, MovieBanner, MoviePoster, MovieInfo } from './styles';
 
-interface Props {
+interface Props extends ReactPropTypes {
   match: {
     params: {
       movieId: string;
     };
   };
+
+  location: {
+    state: {
+      movie: Movie;
+    };
+  };
 }
 
-const MovieDetails: React.FC<Props> = ({ match }) => {
+const MovieDetails: React.FC<Props> = ({ match, location }) => {
   const { user } = useAuth();
 
   const {
@@ -33,9 +39,11 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
     isMovieFavorite,
   } = useFavoriteMovies();
 
-  const [movie, setMovie] = useState<Movie>({
-    voteAverage: 0,
-  } as Movie);
+  const [movie, setMovie] = useState<Movie>(() => {
+    if (!location?.state) return { voteAverage: 0 } as Movie;
+
+    return location.state.movie;
+  });
 
   const [movieIsFavorite, setMovieIsFavorite] = useState(
     () => !!user && isMovieFavorite(parseInt(match.params.movieId, 10)),
@@ -48,7 +56,9 @@ const MovieDetails: React.FC<Props> = ({ match }) => {
       setMovie(data);
     }
 
+    // if (!location?.state?.movie) {
     loadMovie();
+    // }
   }, [match.params.movieId, movie.id, isMovieFavorite, user]);
 
   const handleClickFavoriteIcon = useCallback(

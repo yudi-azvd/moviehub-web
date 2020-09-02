@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+import { Movie } from '../../entities';
 
 import api from '../../services/api';
 import getImage from '../../helpers/getImage';
 
 import { Container, MovieCard, Movies } from './styles';
 import VoteAverage from '../../components/VoteAverage';
-
-interface Movie {
-  id: number;
-  title: string;
-  posterPath: string;
-  voteAverage: number;
-}
 
 const UpcomingMovies: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -34,12 +30,12 @@ const UpcomingMovies: React.FC = () => {
         {movies?.map((movie) => (
           <MovieCard key={movie.id}>
             <div>
-              <a href={`/movies/${movie.id}`}>
+              <Link to={{ pathname: `/movies/${movie.id}`, state: { movie } }}>
                 <img
                   src={`${getImage('miniPoster', movie.posterPath)}`}
                   alt={movie.title}
                 />
-              </a>
+              </Link>
 
               <VoteAverage
                 voteAverage={movie.voteAverage}
@@ -47,9 +43,9 @@ const UpcomingMovies: React.FC = () => {
                 positionAbsolute
               />
 
-              <a href={`/movies/${movie.id}`}>
+              <Link to={{ pathname: `/movies/${movie.id}`, state: { movie } }}>
                 <h3>{movie.title}</h3>
-              </a>
+              </Link>
             </div>
           </MovieCard>
         ))}
